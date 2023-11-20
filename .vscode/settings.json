@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "count_demo.h": "c",
+        "string.h": "c",
+        "stdlib.h": "c",
+        "stdio.h": "c",
+        "system_error": "c",
+        "new_demo.h": "c"
+    }
+}
