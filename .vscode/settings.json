@@ -5,6 +5,12 @@
         "stdlib.h": "c",
         "stdio.h": "c",
         "system_error": "c",
-        "new_demo.h": "c"
+        "new_demo.h": "c",
+        "optional": "c",
+        "array": "c",
+        "functional": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c"
     }
 }
