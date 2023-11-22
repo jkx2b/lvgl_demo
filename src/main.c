@@ -16,7 +16,7 @@ int main(int argc, char const *argv[])
     // lv_example_calendar_1();
     // lv_example_img_1();
     // ui_init();
-    menu_main();
+    // menu_main();
     while (1) {
         lv_timer_handler();
         lv_porting_delay();

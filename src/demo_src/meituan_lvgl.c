@@ -191,9 +191,6 @@ static void shit_menu()
     lv_obj_clear_flag( bg, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
     set_all_pad(bg,&style, 0);
 
-    
-
-
 
     lv_obj_t *bg_head=lv_obj_create(bg);
     lv_obj_set_size(bg_head,160,15);
