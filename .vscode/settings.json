@@ -11,6 +11,9 @@
         "functional": "c",
         "tuple": "c",
         "type_traits": "c",
-        "utility": "c"
+        "utility": "c",
+        "meituan_lvgl.h": "c",
+        "lv_porting.h": "c",
+        "lv_theme_simple.h": "c"
     }
 }
