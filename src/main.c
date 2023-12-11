@@ -1,7 +1,7 @@
 #include "porting/lv_porting.h"
 #include "lvgl.h"
 #include "./demo_src/demo_src.h"
-#include "./squi/ui.h"
+#include "./alarm_sq/ui.h"
 #include "./demo_src/big_shit.h"
 
 int main(int argc, char const *argv[])

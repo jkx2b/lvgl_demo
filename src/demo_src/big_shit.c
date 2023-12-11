@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
+#include "big_shit.h"
 
 static void updata_time(lv_timer_t * timer)
 {
@@ -30,6 +31,9 @@ void alarm_create(lv_obj_t * win)
 
     lv_obj_t *win_obj = lv_obj_create(win);
 
+
+    lv_obj_t *img_img_background1=lv_img_create(win_obj);
+    lv_img_set_src(img_img_background1,&img_background1);
     // win = lv_obj_create(lv_scr_act());
     lv_obj_set_size(win_obj, LV_PCT(100), LV_PCT(100));
     lv_obj_set_style_border_side(win_obj, LV_BORDER_SIDE_NONE, 0);
@@ -38,44 +42,69 @@ void alarm_create(lv_obj_t * win)
     lv_obj_set_style_pad_all(win_obj, 0, 0);
     lv_obj_clear_flag(win_obj, LV_OBJ_FLAG_EVENT_BUBBLE);
 
-    /*Create a list*/
-    lv_obj_t *list1 = lv_list_create(lv_scr_act());
-    lv_obj_set_size(list1, 128, 50);
-    lv_obj_center(list1);
+    /*Create a chart*/
+    lv_obj_t * chart;
+    chart = lv_chart_create(lv_scr_act());
+    lv_obj_set_size(chart, 200, 150);
+    lv_obj_center(chart);
+    lv_chart_set_type(chart, LV_CHART_TYPE_LINE);   /*Show lines and points too*/
 
-    /*Add buttons to the list*/
-    lv_obj_t * btn;
+    /*Add two data series*/
+    lv_chart_series_t * ser1 = lv_chart_add_series(chart, lv_palette_main(LV_PALETTE_RED), LV_CHART_AXIS_PRIMARY_Y);
+    lv_chart_series_t * ser2 = lv_chart_add_series(chart, lv_palette_main(LV_PALETTE_GREEN), LV_CHART_AXIS_SECONDARY_Y);
 
-    lv_list_add_text(list1, "File");
-    btn = lv_list_add_btn(list1, LV_SYMBOL_FILE, "New");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
-    btn = lv_list_add_btn(list1, LV_SYMBOL_DIRECTORY, "Open");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
-    btn = lv_list_add_btn(list1, LV_SYMBOL_SAVE, "Save");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
-    btn = lv_list_add_btn(list1, LV_SYMBOL_CLOSE, "Delete");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
-    btn = lv_list_add_btn(list1, LV_SYMBOL_EDIT, "Edit");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
+    /*Set the next points on 'ser1'*/
+    lv_chart_set_next_value(chart, ser1, 10);
+    lv_chart_set_next_value(chart, ser1, 10);
+    lv_chart_set_next_value(chart, ser1, 10);
+    lv_chart_set_next_value(chart, ser1, 10);
+    lv_chart_set_next_value(chart, ser1, 10);
+    lv_chart_set_next_value(chart, ser1, 10);
+    lv_chart_set_next_value(chart, ser1, 10);
+    lv_chart_set_next_value(chart, ser1, 30);
+    lv_chart_set_next_value(chart, ser1, 70);
+    lv_chart_set_next_value(chart, ser1, 90);
 
-    lv_list_add_text(list1, "Connectivity");
-    btn = lv_list_add_btn(list1, LV_SYMBOL_BLUETOOTH, "Bluetooth");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
-    btn = lv_list_add_btn(list1, LV_SYMBOL_GPS, "Navigation");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
-    btn = lv_list_add_btn(list1, LV_SYMBOL_USB, "USB");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
-    btn = lv_list_add_btn(list1, LV_SYMBOL_BATTERY_FULL, "Battery");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
+    /*Directly set points on 'ser2'*/
+    ser2->y_points[0] = 90;
+    ser2->y_points[1] = 70;
+    ser2->y_points[2] = 65;
+    ser2->y_points[3] = 65;
+    ser2->y_points[4] = 65;
+    ser2->y_points[5] = 65;
+    ser2->y_points[6] = 65;
+    ser2->y_points[7] = 65;
+    ser2->y_points[8] = 65;
+    ser2->y_points[9] = 65;
 
-    lv_list_add_text(list1, "Exit");
-    btn = lv_list_add_btn(list1, LV_SYMBOL_OK, "Apply");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
-    btn = lv_list_add_btn(list1, LV_SYMBOL_CLOSE, "Close");
-    lv_obj_add_event_cb(btn, event_handler, LV_EVENT_CLICKED, NULL);
+    lv_chart_refresh(chart); /*Required after direct set*/
 
 }
 
+static void alarm_off_event(lv_event_t * e)
+{
+   lv_event_code_t code = lv_event_get_code(e);
+   lv_obj_t * target = lv_event_get_target(e);
+//    if(event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT) {
+//        lv_indev_wait_release(lv_indev_get_act());
+
+//    }
+        
+
+    if(LV_EVENT_CLICKED==code  &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT)
+	{
+        lv_obj_del(target);
+		free(target);
+	}
+    else if(LV_EVENT_KEY==code)
+	{
+        lv_obj_del(target);
+		free(target);
+		
+	}
+	
+
+}
 
 void big_shit(void)
 {
@@ -89,8 +118,10 @@ void big_shit(void)
     lv_obj_set_style_pad_all(obj, 0, 0);
     lv_obj_clear_flag(obj, LV_OBJ_FLAG_EVENT_BUBBLE);
 
-    
-    alarm_create(obj);
+    lv_obj_t *gif=lv_gif_create(obj);
+    lv_gif_set_src(gif,&anim_alarm);
+    lv_obj_add_event_cb(obj,alarm_off_event,LV_EVENT_ALL,NULL);
+    // alarm_create(obj);
 }
 
 
