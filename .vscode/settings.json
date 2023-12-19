@@ -14,6 +14,8 @@
         "utility": "c",
         "meituan_lvgl.h": "c",
         "lv_porting.h": "c",
-        "lv_theme_simple.h": "c"
+        "lv_theme_simple.h": "c",
+        "fk_demo.h": "c",
+        "lvgl.h": "c"
     }
 }

@@ -1,8 +1,8 @@
 #include "lv_porting.h"
 #include "lvgl.h"
 
-#define MONITOR_HOR_RES  800
-#define MONITOR_VER_RES  480
+#define MONITOR_HOR_RES  160
+#define MONITOR_VER_RES  128
 #define MONITOR_BUF_SIZE MONITOR_HOR_RES * 10
 
 #ifdef MCU_ENV

@@ -3,6 +3,7 @@
 #include "./demo_src/demo_src.h"
 #include "./alarm_sq/ui.h"
 #include "./demo_src/big_shit.h"
+#include "./poc_src/poc.h"
 
 int main(int argc, char const *argv[])
 {
@@ -18,7 +19,8 @@ int main(int argc, char const *argv[])
     // lv_example_img_1();
     // ui_init();
     // menu_main();
-    big_shit();
+    // big_shit();
+    menu_init();
     while (1) {
         lv_timer_handler();
         lv_porting_delay();
